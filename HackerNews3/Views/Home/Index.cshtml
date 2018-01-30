@@ -1,0 +1,56 @@
+﻿@model HackerNews3.Models.StoryCollection
+
+@{
+    Layout = null;
+
+    ViewBag.Title = "Hack News - Best Stories";
+
+    WebGrid grid = new WebGrid(Model, rowsPerPage: 5);
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+   <meta name="viewport" content="width=device-width" />
+   
+   <link href="~/Content/bootstrap.css" rel="stylesheet" />
+   <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+   <script src="~/Scripts/bootstrap.min.js"></script>
+   <title>Hacker News - Best Stories</title>
+</head>
+<body>
+   <div>
+      <h1>@ViewBag.Title</h1>
+      <hr />
+      <div>
+         <table class="table table-bordered table-responsive table-hover">
+            <tr>
+               <th>Title</th>
+               <th>Author</th>
+            </tr>
+
+            @foreach (var story in Model)
+            {
+               <tr>
+                  <td>@story.Title</td>
+                  <td>@story.Author</td>
+               </tr>
+            }  
+         </table>
+      </div>
+
+      <hr />
+      <nav>
+         <ul class="pagination pagination-sm">
+            @for (var i = 1; i <= ViewBag.NumOfPages; i++)
+            {
+               <li class="page-item" disabled><a class="page-link" href="/Home/Index/?page=@i">@i</a></li>
+            }
+         </ul>
+      </nav>
+
+   </div>
+</body>
+</html>
+
